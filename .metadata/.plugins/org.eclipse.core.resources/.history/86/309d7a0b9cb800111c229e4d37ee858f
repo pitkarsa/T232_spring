@@ -1,0 +1,16 @@
+package com.itvedant.basics.repositories;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.itvedant.basics.models.User;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+	// save - insert , update
+	// deleteById - delete
+	// findAll - select
+	// findById - select
+	
+	public Optional<User> findByEmailId(String emailId);
+}

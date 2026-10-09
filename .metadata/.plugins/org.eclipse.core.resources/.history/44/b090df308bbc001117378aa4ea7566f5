@@ -1,0 +1,5 @@
+package com.itvedant.relations.one_many;
+
+public interface DepartmentProjection {
+
+}

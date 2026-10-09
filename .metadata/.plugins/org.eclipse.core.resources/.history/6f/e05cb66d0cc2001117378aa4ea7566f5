@@ -1,0 +1,23 @@
+package com.itvedant.shopkart.models;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+public class UserDto {
+	
+	@NotNull
+	private String username;
+	@NotNull
+	@Email
+	private String email;
+	@NotNull
+	@Size(min=6, max=12)
+	@Pattern(regexp = "[a-zA-Z0-9@_#]*")
+	private String password;
+	@NotNull
+	@Size(min=10, max=10)
+	private String mobile;
+	private String role;
+}

@@ -1,0 +1,5 @@
+package com.itvedant.basics.repositories;
+
+public interface UserRepository {
+
+}

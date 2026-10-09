@@ -1,0 +1,54 @@
+package com.itvedant.uservalidations.models;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+// Dto class represents the client side input (it is not entity class)
+// we apply validation rules within the Dto
+public class UserDto {
+	@NotNull(message = "username is compulsory")
+	private String username;
+	@NotNull(message="Password is compulsory")
+	@Size(min=6, max=12,message = "Password must be min 6 to max 12 characters")
+	@Pattern(regexp = "[a-zA-Z0-9@#_]*", message="Password can have only alphabets, digits and @#_")
+	private String password;
+	@NotNull(message="Confirm Password is required")
+	private String confirmPassword;
+	@NotNull(message="Email is compulsory")
+	@Email(message = "plz enter the valid email")
+	private String email;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	@Override
+	public String toString() {
+		return "UserDto [username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
+				+ ", email=" + email + "]";
+	}
+
+	
+}

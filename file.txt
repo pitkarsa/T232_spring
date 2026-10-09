@@ -1,0 +1,230 @@
+DDL - create alter drop truncate
+ddl-auto 
+
+===
+maven - project management tools
+        adding dependency (jar) 
+pom.xml - dependencies
+
+added
+1. mysql
+2. JPA - java persistance api
+=======
+
+Web application - ProductCrud
+
+dependencies -
+web, mysql,jpa
+
+new database
+application.properties
+
+models
+repository
+service
+controller
+
+-------------
+api - application programming interface 
+JSON object
+{
+	"id":101,
+	"name":"laptop",
+	"category":"electronics",
+	"price":60000
+}
+JSON array
+[ 
+    {"id":101,"name":"laptop","category":"electronics","price":60000}.
+    {"id":102,"name":"iPhone","category":"mobiles","price":100000}
+]
+api - 
+   REST - REpresentation State Transfer (JSON)
+   SOAP - Simple Object Access Protocol (XML)
+
+
+<product>
+    <id>101</id>
+    <name>laptop</name>
+    <category>electronics</category>
+    <price>60000</price>
+</product>
+
+
+
+----
+class - 
+  main - create object - call the method
+
+http://localhost:8080/hi        GET
+http://localhost:8080/hello     GET
+http://localhost:8080/          GET
+
+
+C - create - db insert query - POST request
+R - read - db select query - GET request
+U - update - db update query - PUT request (full update)
+                             - PATCH request (partial update)
+D - delete - db delete query - DELETE request
+  
+
+endpoints/ (urls): entity : Product
+
+POST "/products" - insert
+GET  "/products" - all the products
+
+GET     "/products/2" - select * from product where id=2;
+DELETE "products/3" - delete id=3
+PUT   "/products/5" - update for id=5
+
+base
+base.models
+base.services
+base.controllers
+base.repositories
+
+==== 
+standard response 
+
+200 OK 
+201 created (insert) POST
+204 No contet (delete) DELETE
+
+404 - page ot found
+400 - bad request
+
+
+
+/users - POST, GET
+/users/__  - GET/PUT/DELETE
+
+
+{
+    "username":"sam",
+    "password":"sam@123",
+    "confirmPassword":"sam@123",
+    "email":"sam@gmail.com"
+}
+
+User - /users
+
+http://localhost:8080/users - by default projection works here
+http://localhost:8080/users/2 - received data is not projected
+http://localhost:8080/users/2?projection=userProjection 
+          - received data is projected
+
+http://localhost:8080/users/search/findByEmail?email=neha@gmail.com
+             &projection=userProjection
+
+==================
+pagination & sorting - when we are fetching all records, we can 
+apply paging and sorting
+
+http://localhost:8080/users?size=1
+http://localhost:8080/users?size=1&page=0
+http://localhost:8080/users?size=1&page=1
+http://localhost:8080/users?size=1&page=2
+http://localhost:8080/users?size=1&page=3
+
+
+http://localhost:8080/users?size=2
+http://localhost:8080/users?size=2&page=0
+http://localhost:8080/users?size=2&page=1
+
+http://localhost:8080/users?size=3
+
+
+sorting
+http://localhost:8080/users?sort=username
+http://localhost:8080/users?sort=age
+http://localhost:8080/users?sort=username,age
+
+http://localhost:8080/users?sort=username,desc
+http://localhost:8080/users?sort=username,age,desc
+http://localhost:8080/users?sort=username,desc,age,desc
+
+@Component - 
+com.itvedant.basics
+com.itvedant.basics.models
+com.itvedant.basics.repositories
+
+@SpringBootApplication = 
+@ComponentScan(basePackage="com.itvedant.basics") // defines the 
+     base package, so as to create the beans 
+@EnableAutoConfiguration // allows auto configurations
+@SpringBootConfiguration // defines the class as configuration class
+
+SpringBoot - till validations , relationships
+
+
+
+=============
+ONe to one
+postman steps
+
+1. add person -POST
+2. add passport -POST
+3. personid -4 , passport id 2
+mapping 
+
+
+localhost:8080/passports/2/person   
+PUT
+body-raw-text : http:localhost:8080/persons/4
+headers: Content-Type: text/uri-list
+
+
+
+receiving data using GET
+http://localhost:8080/passports/2?projection=passportProjection
+====== one to many ==========
+
+1. POST - add departments  localhost:8080/departments
+2. POST - add employee     localhost:8080/employees
+3. mapping  department 1, employee 1
+
+PUT
+http://localhost:8080/employees/1/department
+body raw text: http://localhost:8080/departments/1
+headers: Content-Type: text/uri-list
+
+=== projection
+http://localhost:8080/employees/1?projection=employeeProjection
+http://localhost:8080/departments/1?projection=departmentProjection
+
+========= Many to many
+mapping
+
+http://localhost:8080/doctors/1/allPatients
+POST
+body raw text:
+http://localhost:8080/patients/1
+http://localhost:8080/patients/3
+headers: Content-Type: text/uri-list
+
+
+SpringBoot: basics, CRUD operations, Validations, relationships, 
+            rest repository, security theory
+     	    microservices vs monolithic
+
+            JPA methods, security-practicals, exception handling,
+		payment integration, JWT auth, 
+          
+
+SpringSecurity:
+
+/products - POST/ PUT/ DELETE/ GET - secured - private endpoints
+
+Security important concepts:
+authentication and authorization (roles)
+authentication - validation - id n password 
+     who I am 
+authorization - roles n responsibilities
+
+401 - unauthorized ( authenticated failed  - login)
+403 - forbidden ( unauthorized- authority ) - roles
+
+
+csrf - cross site request forgery
+POST/ PUT/ DELETE cant be executed now. as csrf is enabled
+

@@ -1,0 +1,5 @@
+package com.itvedant.shopkart.models;
+
+public class UserDto {
+
+}

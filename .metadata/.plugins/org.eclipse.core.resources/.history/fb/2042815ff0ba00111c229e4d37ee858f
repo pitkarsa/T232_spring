@@ -1,0 +1,10 @@
+package com.itvedant.basics.models;
+
+import org.springframework.data.rest.core.config.Projection;
+
+import com.itvedant.basics.models.User;
+
+@Projection(types = {User.class})
+public interface UserProjection {
+
+}

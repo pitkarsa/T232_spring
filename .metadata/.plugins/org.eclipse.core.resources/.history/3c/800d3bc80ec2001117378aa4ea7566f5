@@ -1,0 +1,5 @@
+package com.itvedant.shopkart.controllers;
+
+public class UserController {
+
+}

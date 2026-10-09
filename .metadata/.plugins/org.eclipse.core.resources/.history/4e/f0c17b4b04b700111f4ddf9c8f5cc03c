@@ -1,0 +1,5 @@
+package com.itvedant.uservalidations.controllers;
+
+public class UserController {
+
+}

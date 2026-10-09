@@ -1,0 +1,19 @@
+package com.itvedant.relations.one_one;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PassportRepository extends JpaRepository<Passport, Integer> {
+//	ONe to one
+//	postman steps
+//
+//	1. add person -POST
+//	2. add passport -POST
+//	3. personid -4 , passport id 2
+//	mapping 
+//
+//
+//	localhost:8080/passports/2/person   
+//	PUT
+//	body-raw-text : http:localhost:8080/persons/4
+//	headers: Content-Type: text/uri-list
+}

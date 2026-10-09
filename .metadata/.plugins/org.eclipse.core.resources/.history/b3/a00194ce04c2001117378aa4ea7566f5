@@ -1,0 +1,5 @@
+package com.itvedant.shopkart;
+
+public class SecurityConfiguration {
+
+}
