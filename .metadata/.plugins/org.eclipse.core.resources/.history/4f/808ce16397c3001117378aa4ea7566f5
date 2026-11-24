@@ -1,5 +1,0 @@
-package com.itvedant.shopkart.services;
-
-public class MyUserDetailsService {
-
-}

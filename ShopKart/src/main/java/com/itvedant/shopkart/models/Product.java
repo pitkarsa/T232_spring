@@ -1,9 +1,12 @@
 package com.itvedant.shopkart.models;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Product {
@@ -16,6 +19,15 @@ public class Product {
 	private String imagePath;
 	private String description;
 	
+	@OneToMany(mappedBy = "product")
+	private List<Cart> allCart;
+		
+	public List<Cart> getAllCart() {
+		return allCart;
+	}
+	public void setAllCart(List<Cart> allCart) {
+		this.allCart = allCart;
+	}
 	public String getDescription() {
 		return description;
 	}

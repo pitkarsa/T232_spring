@@ -1,5 +1,0 @@
-package com.itvedant.shopkart.repositories;
-
-public interface ProductRepository {
-
-}

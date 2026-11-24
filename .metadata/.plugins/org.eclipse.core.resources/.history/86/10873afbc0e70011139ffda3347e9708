@@ -1,0 +1,64 @@
+package com.itvedant.shopkart;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.itvedant.shopkart.services.MyUserDetailsService;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration {
+	
+	@Autowired
+	private JwtTokenFilter jwtTokenFilter;
+	
+	@Bean
+	public PasswordEncoder encoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+//		http.csrf(csrf -> csrf.disable());		
+		
+		http
+		.csrf(csrf->csrf.disable())
+		.authorizeHttpRequests(auth -> 
+				auth.requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.PUT, "/products/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
+//				.requestMatchers("/users/**/myCart").hasRole("USER")// GET
+				.requestMatchers("/carts").hasRole("USER") //POST, 
+				.requestMatchers("/carts/**").hasRole("USER")// PUT,DELETE
+				.anyRequest()
+				.permitAll()
+				)
+		// for db login, with Httpbasic, use below code
+//		.httpBasic(Customizer.withDefaults());
+		// for jwts authentication, add the filters
+		.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+		return http.build();
+	}
+	
+	// db login, 
+	@Autowired
+	private MyUserDetailsService myUserDetailsService;
+	
+	
+	@Bean
+	public AuthenticationManager authenticationManager(HttpSecurity http) 
+			throws Exception {
+		return http.getSharedObject(AuthenticationManagerBuilder.class).build();
+	}	
+}

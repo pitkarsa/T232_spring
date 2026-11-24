@@ -1,9 +1,0 @@
-package com.itvedant.shopkart.repositories;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.itvedant.shopkart.models.User;
-
-public interface UserRepository extends JpaRepository<User, Integer>{
-
-}

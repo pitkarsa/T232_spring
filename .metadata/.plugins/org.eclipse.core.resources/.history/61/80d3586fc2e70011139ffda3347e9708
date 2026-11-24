@@ -1,0 +1,12 @@
+package com.itvedant.shopkart.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import com.itvedant.shopkart.models.Product;
+import com.itvedant.shopkart.models.ProductProjection;
+
+@RepositoryRestResource(excerptProjection = ProductProjection.class)
+public interface ProductRepository extends JpaRepository<Product, Integer>{
+
+}

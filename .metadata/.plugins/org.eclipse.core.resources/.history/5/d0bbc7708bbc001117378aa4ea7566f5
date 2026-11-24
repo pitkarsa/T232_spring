@@ -1,7 +1,0 @@
-package com.itvedant.relations.one_many;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface EmployeeRepository  extends JpaRepository<Employee, Integer>{
-
-}

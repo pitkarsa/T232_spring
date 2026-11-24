@@ -1,5 +1,0 @@
-package com.itvedant.relations.one_one;
-
-public interface PersonRepository {
-
-}

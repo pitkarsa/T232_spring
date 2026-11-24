@@ -6,10 +6,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.itvedant.basics.models.User;
 import com.itvedant.basics.projections.UserProjection;
 
+@CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RepositoryRestResource(excerptProjection = UserProjection.class)
 // by default, projection works on findAll
 // i.e. localhost:8080/users  GET

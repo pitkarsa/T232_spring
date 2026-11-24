@@ -1,5 +1,0 @@
-package com.itvedant.relations.many_many;
-
-public interface DoctorRepository {
-
-}

@@ -12,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class User implements UserDetails {
@@ -23,6 +25,18 @@ public class User implements UserDetails {
 	private String email;
 	private String password;
 	private String mobile;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Cart> myCart;
+	
+	public List<Cart> getMyCart() {
+		return myCart;
+	}
+	public void setMyCart(List<Cart> myCart) {
+		this.myCart = myCart;
+	}
+
+
 	@ElementCollection // will create the separate table for user_roles
 	private List<String> roles;
 		
@@ -70,6 +84,7 @@ public class User implements UserDetails {
 
 
 	// DB login code, for UserDetails
+	@Transient // no column will be created for authorities
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	@Override
@@ -91,9 +106,4 @@ public class User implements UserDetails {
 		this.roles = roles;
 		this.authorities = authorities;
 	}
-	
-	
-	
-	
-	
 }

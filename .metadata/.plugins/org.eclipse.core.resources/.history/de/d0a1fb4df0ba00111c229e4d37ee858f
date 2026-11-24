@@ -1,5 +1,0 @@
-package com.itvedant.basics.models;
-
-public interface UserProjection {
-
-}
